@@ -1,0 +1,6 @@
+# Learn how to use CODEOWNERS files on GitHub here:
+#  https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+#
+# PRs to files matching the path below (* aka all files) should engage the listed users so they can look over the code.
+
+*	@dpritchett @xtebs
