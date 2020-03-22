@@ -10,6 +10,6 @@ Spike out an Express + Mongo prototype to be hosted on a simple VPS (digital oce
 - Provide CI/CD to all authorized developers
 
 ## Contact
-(all contacts in the [#project-monitoring-o2](https://app.slack.com/client/TUTSYURT3/CV52VNTJM) slack room on HelpfulEngineering Slack
+_(all contacts in the [#project-monitoring-o2](https://app.slack.com/client/TUTSYURT3/CV52VNTJM) slack room on HelpfulEngineering Slack)_
 - Daniel Pritchett: Repo admin, project planning + infra + dev + arch feedback (@dpritchett)
 - Hugo Esteves: Node+Mongo rapid web app dev specialist (@xtebs)
