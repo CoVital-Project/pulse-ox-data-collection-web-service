@@ -6,7 +6,7 @@
     "node": "~> 13.8.0",
     "npm": ">= 6.13.7"
   },
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,11 @@
   },
   "homepage": "https://github.com/CoVital-Project/node-mongo-backend-spike#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "mongodb": "^3.5.5"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "jest-express": "^1.11.3"
   }
 }
