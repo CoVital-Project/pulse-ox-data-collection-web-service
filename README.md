@@ -1,4 +1,6 @@
 # node-mongo-backend-spike
+![Node.js CI](https://github.com/CoVital-Project/node-mongo-backend-spike/workflows/Node.js%20CI/badge.svg)
+
 Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend going
 
 ## Short term plan
