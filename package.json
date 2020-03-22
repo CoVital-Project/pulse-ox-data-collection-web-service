@@ -6,7 +6,7 @@
     "node": "~> 13.8.0",
     "npm": ">= 6.13.7"
   },
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "jest"
   },
@@ -25,6 +25,7 @@
     "mongodb": "^3.5.5"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.1.3",
     "jest": "^25.1.0"
   }
 }
