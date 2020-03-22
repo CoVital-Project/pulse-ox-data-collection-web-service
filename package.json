@@ -1,0 +1,26 @@
+{
+  "name": "covital-backend-spike",
+  "version": "1.0.0",
+  "description": "PulseOx metrics collection backend spike",
+  "engines": {
+    "node": "~> 13.8.0",
+    "npm": ">= 6.13.7"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoVital-Project/node-mongo-backend-spike.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CoVital-Project/node-mongo-backend-spike/issues"
+  },
+  "homepage": "https://github.com/CoVital-Project/node-mongo-backend-spike#readme",
+  "dependencies": {
+    "mongodb": "^3.5.5"
+  }
+}

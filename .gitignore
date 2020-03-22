@@ -1,0 +1,5 @@
+# package downloads
+node_modules
+
+# asdf local version selector for node, npm, etc
+.tool-versions
