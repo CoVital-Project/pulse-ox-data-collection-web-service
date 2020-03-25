@@ -1,6 +1,6 @@
-# node-mongo-backend-spike
+# pulse-ox-data-collection-web-service
 
-![Node.js CI](https://github.com/CoVital-Project/node-mongo-backend-spike/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/workflows/Node.js%20CI/badge.svg)
 
 Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend going
 
@@ -30,12 +30,12 @@ Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend 
 
 ## Appdev TODOs
 
-See the [GitHub issues for this project](https://github.com/CoVital-Project/node-mongo-backend-spike/issues).
+See the [GitHub issues for this project](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/issues).
 
 ## Contributing
 
 - Changes should be PRed into `master`
-- Builds must pass [all CI checks](https://github.com/CoVital-Project/node-mongo-backend-spike/actions) to merge
+- Builds must pass [all CI checks](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/actions) to merge
 
 ## Short term plan
 
@@ -53,3 +53,5 @@ _(all contacts in the [#project-monitoring-o2](https://app.slack.com/client/TUTS
 
 - Daniel Pritchett: Repo admin, project planning + infra + dev + arch feedback (@dpritchett)
 - Hugo Esteves: Node+Mongo rapid web app dev specialist (@xtebs)
+- Paulo Alfaiate: General backend/security specialist (@palfaiate)
+- Dave Hagman: Platform/infrastructure automation (@haggy)
