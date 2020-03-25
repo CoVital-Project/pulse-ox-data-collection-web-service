@@ -28,6 +28,16 @@ Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend 
 - npm start (First test user will be added automatically trough migration)
 - test you browser for "localhost:3000/diagnoses"
 
+## Testing your PRs:
+We have a github action defined in `.github/workflows/ci.yml` that will run a basic node lint/test/build pipeline. You can test locally without waiting for CI by running the following:
+- `npm run ci-build`
+
+## Running in Docker:
+We are looking to set up Docker compose eventually but for now we have a simple Dockerfile for you:
+- `docker build -t covital/ingress .`
+- `docker run -t covital/ingress`
+
+
 ## Appdev TODOs
 
 See the [GitHub issues for this project](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/issues).

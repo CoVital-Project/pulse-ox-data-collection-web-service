@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import Promise from "bluebird";
+import mongoose from 'mongoose';
+import Promise from 'bluebird';
 
 mongoose.Promise = Promise;
 
@@ -29,12 +29,12 @@ const dbName = process.env.DBNAME;
 const dbURL = `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
 export function mongooseConnect() {
-  mongoose.set("useNewUrlParser", true);
-  mongoose.set("useFindAndModify", false);
-  mongoose.set("useCreateIndex", true);
-  mongoose.set("useUnifiedTopology", true);
+  mongoose.set('useNewUrlParser', true);
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('useCreateIndex', true);
+  mongoose.set('useUnifiedTopology', true);
 
-  console.info("Connecting to mongo: " + dbURL);
+  console.info('Connecting to mongo: ' + dbURL);
 
   return mongoose.connect(dbURL, options);
 }
