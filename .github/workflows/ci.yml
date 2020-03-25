@@ -4,8 +4,10 @@
 name: Node.js CI
 
 on:
+  # run after each push to master, including merged PRs
   push:
     branches: [ master ]
+  # run whenever a PR to master is opened or updated
   pull_request:
     branches: [ master ]
 

@@ -1,7 +1,10 @@
 name: Publish Image to Docker Hub
 
-# GHA workflows for "run this only after a PR merge to master" are weird, still hacking here
-on: [push, pull_request]
+on:
+  # run after each push to master, including PR merges
+  # will not run proactively on pre-merge master PRs!
+  push:
+    branches: [ master ]
 
 jobs:
   build:
@@ -9,8 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
-      # GHA workflows for "run this only after a PR merge to master" are weird, still hacking here
-      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: covital/ingress
