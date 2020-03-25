@@ -26,7 +26,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "merge-when-passing, !wip,!work in progress"
-          UPDATE_LABELS: "auto-rebase-and-merge-when-passing"
+          UPDATE_LABELS: "auto-rebase"
           UPDATE_METHOD: "rebase"
           MERGE_METHOD: "squash"
           MERGE_FORKS: "false"
