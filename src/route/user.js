@@ -34,4 +34,32 @@ router.get(
       });
   }
 );
+
+// Create new FE user
+router.post(
+  "/",
+  //Roles.requireRole('admin')
+  function(req, res) {
+    if (!req.body.uid || req.body === {}) {
+      //validation - we need an userId to add the new data
+      return res
+        .status(400)
+        .json(
+          "Please add userID to the body of request & make sure user model is fulfilled"
+        );
+    }
+    return userController
+      .save(req.body)
+      .then(result => {
+        res.status(201);
+        return res.json({ data: result });
+      })
+      .catch(err => {
+        res.status(400);
+        console.warn(" Problems creating user: ", err);
+        return res.json({ result: "failure", message: err });
+      });
+  }
+);
+
 export default router;

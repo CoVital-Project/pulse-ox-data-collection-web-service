@@ -1,6 +1,7 @@
 import Promise from "bluebird";
 import express from "express";
 import migrate from "migrate";
+import bodyParser from "body-parser";
 import {} from "dotenv/config"; //tricky - Improve
 
 import { mongooseConnect, mongooseDisconnect } from "./config/db";
@@ -9,13 +10,11 @@ import MigrateDbStore from "./MigrateDbStore";
 // Routes
 import PUBLIC_userRouter from "./route/user"; //to be changed by authenticated route - at the moment will be public
 
-//import { mainlog } from "./util/log";
-
 const app = express();
 const port = 3000;
 app.set("port", port);
 
-// connect to mongo
+// Tasks to run on start up
 (async () => {
   try {
     await mongooseConnect();
@@ -47,7 +46,12 @@ app.set("port", port);
 app.listen(port, () =>
   console.log(`Covital backend listening on port ${port}...`)
 );
-app.use(express.json());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
 app.use("/diagnoses", PUBLIC_userRouter);
 
 //Routes

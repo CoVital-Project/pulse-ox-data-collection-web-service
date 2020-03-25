@@ -8,11 +8,12 @@ mongoose.Promise = Promise;
 
 const userSchema = new Schema(
   {
-    // id: {
-    //   type: String,
-    //   unique: true,
-    //   required: true
-    // },
+    uid: {
+      //if the UID is comint from the AUTH system - not implemented yet
+      type: String,
+      required: true,
+      unique: true
+    },
 
     diagnoses: [
       {

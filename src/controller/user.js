@@ -11,12 +11,25 @@ export default class UserController {
     if (!extras) {
       extras = {};
     }
-    console.log("before");
 
-    let result = await User.find({})
+    return await User.find({})
       .lean()
       .exec();
-    console.log("after: ", result);
-    return result;
+  }
+
+  async save(userData, extras = null) {
+    //create user
+    console.log("here!");
+    // extras not used yet
+    if (!extras) {
+      extras = {};
+    }
+    var newUser = new User(userData);
+
+    try {
+      return newUser.save(userData);
+    } catch (err) {
+      return err;
+    }
   }
 }
