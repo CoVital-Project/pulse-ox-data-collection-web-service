@@ -9,7 +9,7 @@ mongoose.Promise = Promise;
 const userSchema = new Schema(
   {
     uid: {
-      //if the UID is comint from the AUTH system - not implemented yet
+      //if the UID is coming from the AUTH system - not implemented yet
       type: String,
       required: true,
       unique: true

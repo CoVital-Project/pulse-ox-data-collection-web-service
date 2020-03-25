@@ -4,6 +4,7 @@ import User from "../src/model/user";
 
 let newUsers = [
   {
+    uid: "test_user_uid1",
     diagnoses: [
       {
         questions: [
