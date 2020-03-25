@@ -1,8 +1,8 @@
-import Entity from "./entity";
+import Entity from './entity';
 
 const resolve = mongooseOperation => {
   const promise =
-    mongooseOperation.constructor.name === "Promise"
+    mongooseOperation.constructor.name === 'Promise'
       ? mongooseOperation
       : mongooseOperation.exec();
 
@@ -16,8 +16,8 @@ const resolve = mongooseOperation => {
 
 export default class Persistence {
   constructor(type) {
-    if (!(type.prototype.constructor.name === "model")) {
-      throw new Error("Controller accepts only mongoose models as types");
+    if (!(type.prototype.constructor.name === 'model')) {
+      throw new Error('Controller accepts only mongoose models as types');
     }
     this.type = type;
   }
@@ -49,7 +49,7 @@ export default class Persistence {
   save(attributes) {
     const entity = new this.type();
     Entity.populate(entity, attributes);
-    console.log("entity ", entity);
+    console.log('entity ', entity);
     return resolve(entity.save());
   }
 
@@ -75,11 +75,11 @@ export default class Persistence {
 function ZeroResultsException(message) {
   this.message = message;
   // Use V8's native method if available, otherwise fallback
-  if ("captureStackTrace" in Error) {
+  if ('captureStackTrace' in Error) {
     Error.captureStackTrace(this, ZeroResultsException);
   } else this.stack = new Error().stack;
 }
 
 ZeroResultsException.prototype = Object.create(Error.prototype);
-ZeroResultsException.prototype.name = "ZeroResultsException";
+ZeroResultsException.prototype.name = 'ZeroResultsException';
 ZeroResultsException.prototype.constructor = ZeroResultsException;

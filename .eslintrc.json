@@ -1,8 +1,13 @@
 {
   "root": true,
-  "extends": "eslint:recommended",
-  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "prettier/babel"
+  ],
+  "plugins": ["jest"],
+  "ignorePatterns": ["node_modules/"],
   "parserOptions": {
+    "parser": "babel-eslint",
     "ecmaVersion": 8,
     "sourceType": "module"
   },
@@ -10,7 +15,8 @@
     "node": true,
     "commonjs": false,
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
   "rules": {
     "no-template-curly-in-string": 0,
@@ -53,5 +59,16 @@
     "jsx-a11y/anchor-is-valid": 0,
     "array-callback-return": 2,
     "require-atomic-updates": 1
-  }
+  },
+"overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
 }

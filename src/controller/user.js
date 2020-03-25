@@ -1,5 +1,5 @@
 //import Persistence from "./persistence";
-import User from "../model/user";
+import User from '../model/user';
 
 export default class UserController {
   constructor() {
@@ -11,12 +11,12 @@ export default class UserController {
     if (!extras) {
       extras = {};
     }
-    console.log("before");
+    console.log('before');
 
     let result = await User.find({})
       .lean()
       .exec();
-    console.log("after: ", result);
+    console.log('after: ', result);
     return result;
   }
 }

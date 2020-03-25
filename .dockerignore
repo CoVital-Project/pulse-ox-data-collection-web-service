@@ -1,2 +1,8 @@
 .git
 node_modules
+
+# editor configs
+.idea
+*.swp
+*.swo
+*~

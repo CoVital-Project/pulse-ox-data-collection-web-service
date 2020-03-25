@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
-import sanitize from "mongo-sanitize";
-import paginate from "mongoose-paginate-v2";
+import { Timestamp } from 'mongo';
+
+import mongoose from 'mongoose';
+import sanitize from 'mongo-sanitize';
+import paginate from 'mongoose-paginate-v2';
 const Schema = mongoose.Schema;
-const Promise = require("bluebird");
+const Promise = require('bluebird');
 
 mongoose.Promise = Promise;
 
@@ -19,7 +21,7 @@ const userSchema = new Schema(
         timestamp: {
           type: Date,
           required: true
-        }
+        },
         questions: [
           {
             questionId: {
@@ -67,7 +69,7 @@ const userSchema = new Schema(
               required: true
             }
           }]
-        }]
+        }],
         readings: [
           {
             BPM: {
@@ -85,7 +87,7 @@ const userSchema = new Schema(
             location: {
               type: {
                 type: String, // Don't do `{ location: { type: String } }`
-                enum: ["Point"], // 'location.type' must be 'Point'
+                enum: ['Point'], // 'location.type' must be 'Point'
                 required: true
               },
               coordinates: {
@@ -131,7 +133,7 @@ const userSchema = new Schema(
 
 //userSchema.plugin(paginate);
 
-const userModel = mongoose.model("User", userSchema);
+const userModel = mongoose.model('User', userSchema);
 
 export default userModel;
 module.exports = userModel;
