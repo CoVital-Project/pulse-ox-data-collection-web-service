@@ -16,6 +16,10 @@ const userSchema = new Schema(
 
     diagnoses: [
       {
+        timestamp: {
+          type: Date,
+          required: true
+        }
         questions: [
           {
             questionId: {
@@ -27,7 +31,7 @@ const userSchema = new Schema(
               required: true 
             },
             timestamp: {
-              type: Timestamp,
+              type: Date,
               required: true
             }
           }
@@ -55,7 +59,7 @@ const userSchema = new Schema(
           },
           status:[{
             timestamp: {
-              type: Timestamp,
+              type: Date,
               required: true
             },
             severity: {
@@ -90,7 +94,7 @@ const userSchema = new Schema(
               }
             },
             timestamp: {
-              type: Timestamp,
+              type: Date,
               required: true
             }
           }
