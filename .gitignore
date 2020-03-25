@@ -4,3 +4,9 @@ node_modules
 
 # asdf local version selector for node, npm, etc
 .tool-versions
+
+# editor stuff
+.idea
+*.swp
+*.swo
+*~

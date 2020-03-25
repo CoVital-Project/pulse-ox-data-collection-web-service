@@ -1,5 +1,5 @@
 //import Persistence from "./persistence";
-import User from "../model/user";
+import User from '../model/user';
 
 export default class UserController {
   constructor() {
@@ -19,7 +19,7 @@ export default class UserController {
 
   async save(userData, extras = null) {
     //create user
-    console.log("here!");
+    console.log('here!');
     // extras not used yet
     if (!extras) {
       extras = {};
