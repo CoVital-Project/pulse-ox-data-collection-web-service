@@ -25,22 +25,22 @@ app.set("port", port);
     process.exit(2);
   }
 
-  migrate.load(
-    {
-      stateStore: new MigrateDbStore()
-    },
-    function(err, migrationSet) {
-      if (err) {
-        console.error(err);
-      }
-      migrationSet.up(function(err) {
-        if (err) {
-          console.error(err);
-        }
-        return migrationSet;
-      });
-    }
-  );
+  // migrate.load(
+  //   {
+  //     stateStore: new MigrateDbStore()
+  //   },
+  //   function(err, migrationSet) {
+  //     if (err) {
+  //       console.error(err);
+  //     }
+  //     migrationSet.up(function(err) {
+  //       if (err) {
+  //         console.error(err);
+  //       }
+  //       return migrationSet;
+  //     });
+  //   }
+  // );
 })();
 // Routes
 app.listen(port, () =>
