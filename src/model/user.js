@@ -22,9 +22,12 @@ const userSchema = new Schema(
               type: String,
               required: true
             },
-            answer: { type: String, required: true },
+            answer: { 
+              type: String, 
+              required: true 
+            },
             timestamp: {
-              type: Date,
+              type: Timestamp,
               required: true
             }
           }
@@ -40,14 +43,38 @@ const userSchema = new Schema(
               required: true
             },
             timestamp: {
-              type: Date,
+              type: Timestamp,
               required: true
             }
           }
         ],
+        symptoms: [{
+          symptom: {
+            type: String,
+            required: true
+          },
+          status:[{
+            timestamp: {
+              type: Timestamp,
+              required: true
+            },
+            severity: {
+              type: String,
+              required: true
+            }
+          }]
+        }]
         readings: [
           {
             BPM: {
+              type: Number,
+              required: true
+            },
+            SPO2: {
+              type: Number,
+              required: true
+            },
+            Temperature: {
               type: Number,
               required: true
             },
@@ -63,7 +90,7 @@ const userSchema = new Schema(
               }
             },
             timestamp: {
-              type: Date,
+              type: Timestamp,
               required: true
             }
           }
