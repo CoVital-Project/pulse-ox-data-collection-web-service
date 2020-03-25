@@ -1,4 +1,4 @@
-name: Publish Docker Image
+name: Publish Image to Docker Hub
 on: [push]
 jobs:
   build:
@@ -9,5 +9,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: covital/ingress
+        snapshot: true
+        tags: "master"
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
