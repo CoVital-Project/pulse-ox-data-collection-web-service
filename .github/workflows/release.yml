@@ -1,5 +1,8 @@
 name: Publish Image to Docker Hub
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,7 +12,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: covital/ingress
+        # adds an additional unique 202003251103shagoeshere tag
         snapshot: true
-        tags: "master"
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
