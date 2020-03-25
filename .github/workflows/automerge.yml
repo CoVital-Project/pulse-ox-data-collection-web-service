@@ -29,4 +29,4 @@ jobs:
           UPDATE_LABELS: "auto-rebase"
           UPDATE_METHOD: "rebase"
           MERGE_METHOD: "squash"
-          MERGE_FORKS: "false"
+          MERGE_FORKS: "true"
