@@ -1,8 +1,9 @@
 name: Publish Image to Docker Hub
-on:
-  push:
-    branches:
-      - master
+
+# only run after PRs merge to master
+#   from https://github.community/t5/GitHub-Actions/Trigger-workflow-only-on-pull-request-MERGE/td-p/43201
+if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+
 jobs:
   build:
     runs-on: ubuntu-latest
