@@ -8,27 +8,27 @@ mongoose.Promise = Promise;
 
 const userSchema = new Schema(
   {
-    // id: {
-    //   type: String,
-    //   unique: true,
-    //   required: true
-    // },
-
+    uid: {
+      //if the UID is coming from the AUTH system - not implemented yet
+      type: String,
+      required: true,
+      unique: true
+    },
     diagnoses: [
       {
         timestamp: {
           type: Date,
           required: true
-        }
+        },
         questions: [
           {
             questionId: {
               type: String,
               required: true
             },
-            answer: { 
-              type: String, 
-              required: true 
+            answer: {
+              type: String,
+              required: true
             },
             timestamp: {
               type: Date,
@@ -47,27 +47,31 @@ const userSchema = new Schema(
               required: true
             },
             timestamp: {
-              type: Timestamp,
+              type: Date,
               required: true
             }
           }
         ],
-        symptoms: [{
-          symptom: {
-            type: String,
-            required: true
-          },
-          status:[{
-            timestamp: {
-              type: Date,
-              required: true
-            },
-            severity: {
+        symptoms: [
+          {
+            symptom: {
               type: String,
               required: true
-            }
-          }]
-        }]
+            },
+            status: [
+              {
+                timestamp: {
+                  type: Date,
+                  required: true
+                },
+                severity: {
+                  type: String,
+                  required: true
+                }
+              }
+            ]
+          }
+        ],
         readings: [
           {
             BPM: {
