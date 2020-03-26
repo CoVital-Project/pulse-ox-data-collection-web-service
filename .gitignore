@@ -6,6 +6,9 @@ node_modules
 .env
 .envrc
 
+# compiled assets
+dist/*
+
 # asdf local version selector for node, npm, etc
 .tool-versions
 
