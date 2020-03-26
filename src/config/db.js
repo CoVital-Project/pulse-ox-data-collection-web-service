@@ -26,7 +26,7 @@ const dbPassword = process.env.DBPASSWORD;
 const dbAddress = process.env.DBADDRESS;
 const dbPort = process.env.DBPORT || 27017;
 const dbName = process.env.DBNAME;
-const dbURL = `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
+const dbURL = process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
 export function mongooseConnect() {
   mongoose.set('useNewUrlParser', true);
