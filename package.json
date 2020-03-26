@@ -6,7 +6,7 @@
     "node": "~> 13.8.0",
     "npm": ">= 6.13.7"
   },
-  "main": "src/app.js",
+  "main": "src/openapi-app.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
