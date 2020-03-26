@@ -5,7 +5,9 @@ services:
     ports:
       - 3000:3000
     volumes: 
-      - ./volumes/pulse_ws:/app
+      - ./volumes/pulse_ws/conf:/app/conf
+    depends_on: 
+      - mongo
   mongo:
     image: mongo
     restart: always
