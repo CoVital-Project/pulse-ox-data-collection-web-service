@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "6dda174f-6c74-4346-88b0-74fb498fbd2b",
+		"name": "CoVital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Diagnoses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{PULSE_HOST}}:{{PULSE_PORT}}/diagnoses",
+					"protocol": "http",
+					"host": [
+						"{{PULSE_HOST}}"
+					],
+					"port": "{{PULSE_PORT}}",
+					"path": [
+						"diagnoses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Diagnoses",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"uid\": \"UID_foobar\",\n\t\"diagnoses\": [],\n\t\"age\": 30,\n\t\"role\": \"ROLE_foobar\",\n\t\"gender\": \"male\",\n\t\"schema_version\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{PULSE_HOST}}:{{PULSE_PORT}}/diagnoses",
+					"protocol": "http",
+					"host": [
+						"{{PULSE_HOST}}"
+					],
+					"port": "{{PULSE_PORT}}",
+					"path": [
+						"diagnoses"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "2f2dc38b-7a69-4819-a4ba-3f3bcfa2a9be",
+			"key": "PULSE_HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"id": "59ccd039-8393-4c9d-9d09-0f85d0ac609c",
+			"key": "PULSE_PORT",
+			"value": "3000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
