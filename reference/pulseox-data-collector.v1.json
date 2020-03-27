@@ -20,6 +20,24 @@
   ],
   "paths": {
     "/users": {
+      "post": {
+        "summary": "",
+        "operationId": "post-users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      },
       "get": {
         "summary": "",
         "operationId": "get-users",
@@ -35,24 +53,6 @@
                   }
                 }
               }
-            }
-          }
-        }
-      }
-    },
-    "post": {
-      "summary": "",
-      "operationId": "post-users",
-      "responses": {
-        "200": {
-          "description": "OK"
-        }
-      },
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/User"
             }
           }
         }
