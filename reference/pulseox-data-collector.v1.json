@@ -116,151 +116,14 @@
       "User": {
         "title": "User",
         "type": "object",
+        "x-examples": {
+          "User Example 1": {}
+        },
+        "description": "User model contains one person's entire pulse oximetry data collection history in a single document.",
         "properties": {
           "uid": {
             "type": "string",
             "description": "Possibly received from our auth frontend."
-          },
-          "diagnoses": {
-            "type": "object",
-            "required": [
-              "timestamp"
-            ],
-            "properties": {
-              "timestamp": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "questions": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "questionID": {
-                      "type": "string"
-                    },
-                    "answer": {
-                      "type": "string"
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  },
-                  "required": [
-                    "questionID",
-                    "answer",
-                    "timestamp"
-                  ]
-                }
-              },
-              "status": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "action": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "string"
-                    },
-                    "timestamp": {
-                      "type": "string",
-                      "format": "date-time"
-                    }
-                  },
-                  "required": [
-                    "action",
-                    "status",
-                    "timestamp"
-                  ]
-                }
-              },
-              "symptoms": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "symptom": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "timestamp": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "severity": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "timestamp",
-                          "severity"
-                        ]
-                      }
-                    }
-                  },
-                  "required": [
-                    "symptom"
-                  ]
-                }
-              },
-              "readings": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "BPM": {
-                      "type": "number"
-                    },
-                    "SPO2": {
-                      "type": "number"
-                    },
-                    "Temperature": {
-                      "type": "number"
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "Point"
-                          ]
-                        },
-                        "coordinates": {
-                          "type": "array",
-                          "maxItems": 2,
-                          "minItems": 2,
-                          "items": {
-                            "type": "number"
-                          }
-                        },
-                        "timestamp": {
-                          "type": "string",
-                          "format": "date-time"
-                        }
-                      },
-                      "required": [
-                        "type",
-                        "coordinates",
-                        "timestamp"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "BPM",
-                    "SPO2",
-                    "Temperature"
-                  ]
-                }
-              }
-            }
           },
           "age": {
             "type": "number"
@@ -273,6 +136,150 @@
           },
           "schema_version": {
             "type": "integer"
+          },
+          "diagnoses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "questionID": {
+                        "type": "string"
+                      },
+                      "answer": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    },
+                    "required": [
+                      "questionID",
+                      "answer",
+                      "timestamp"
+                    ]
+                  }
+                },
+                "status": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    },
+                    "required": [
+                      "action",
+                      "status",
+                      "timestamp"
+                    ]
+                  }
+                },
+                "symptoms": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "symptom": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "timestamp": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "severity": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "timestamp",
+                            "severity"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "symptom"
+                    ]
+                  }
+                },
+                "readings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "BPM": {
+                        "type": "number"
+                      },
+                      "SPO2": {
+                        "type": "number"
+                      },
+                      "Temperature": {
+                        "type": "number"
+                      },
+                      "location": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "Point"
+                            ]
+                          },
+                          "coordinates": {
+                            "type": "array",
+                            "maxItems": 2,
+                            "minItems": 2,
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "coordinates",
+                          "timestamp"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "BPM",
+                      "SPO2",
+                      "Temperature"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "timestamp"
+              ]
+            }
           }
         },
         "required": [
@@ -280,12 +287,9 @@
           "age",
           "gender",
           "schema_version"
-        ],
-        "x-examples": {
-          "User Example 1": {}
-        },
-        "description": "User model contains one person's entire pulse oximetry data collection history in a single document."
+        ]
       }
     }
   }
 }
+
