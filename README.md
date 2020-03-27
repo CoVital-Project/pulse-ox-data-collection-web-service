@@ -2,7 +2,7 @@
 
 ![Node.js CI](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/workflows/Node.js%20CI/badge.svg)
 
-Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend going
+Data collection web service for receiving and storing pulse oximetry from our CoVital mobile and web app partner projects.
 
 <!-- ## Local development
 - Install the versions of `node` and `npm` specified in package.json
@@ -14,6 +14,7 @@ Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend 
 ## Getting started (locally):
 
 - .env file filled with the credencials of you mongoDB
+```console
   NODE_ENV=development
   DBUSER=covital
   DBPASSWORD=my_db_password
@@ -21,12 +22,13 @@ Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend 
   DBPORT=27017
   DBNAME=covital
   DBAUTHSOURCE=covital
+```
 
 - MongoDB must be running
-  -You can use the ./devops/mongo-db-setup.sh to create covital db automatically (mongo must be installed)
-- npm install
-- npm start (First test user will be added automatically trough migration)
-- test you browser for "localhost:3000/diagnoses"
+  - You can use the `./devops/mongo-db-setup.sh` to create covital db automatically (`mongo` must be installed)
+- `npm install`
+- `npm start` (First test user will be added automatically through migration)
+- Open http://localhost:9000/api-docs in a browser to confirm your install is working.
 
 ## Testing your PRs:
 We have a github action defined in `.github/workflows/ci.yml` that will run a basic node lint/test/build pipeline. You can test locally without waiting for CI by running the following:
@@ -47,6 +49,22 @@ __NOTE:__ The Pulse web service will fail to connect to Mongo until you run the 
 If you don't have Postman you can download it [here](https://www.postman.com/downloads/). 
 The postman collection is stored in this repo under [docs/postman/pulse-collection.json](docs/postman/pulse-collection.json)
 
+## Testing the web service manually via SwaggerUI
+- Locally: http://localhost:9000/api-docs
+- Staging: https://guarded-crag-28391.herokuapp.com/api-docs/
+- Production: N/A
+
+## Staging server
+See https://guarded-crag-28391.herokuapp.com/api-docs/ for interactive API playground with documentation.
+
+## Client libraries for submitting data (mobile, web, etc)
+
+### Prebuilt client libraries
+See the [Releases page](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/releases) in the repo for pregenerated client libraries for javascript, dart, and ajva.
+
+### Build your own against the latest `master` commit
+Clone this repo and run `make` to generate client bindings for multiple languages.
+
 ## Appdev TODOs
 
 See the [GitHub issues for this project](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/issues).
@@ -56,9 +74,6 @@ See the [GitHub issues for this project](https://github.com/CoVital-Project/puls
 - Changes should be PRed into `master`
 - Builds must pass [all CI checks](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/actions) to merge
 
-## Short term plan
-
-Spike out an Express + Mongo prototype to be hosted on a simple VPS (digital ocean) with SSH access) as an outlet for any let's-get-this-going creative energies
 
 ## Midterm plan
 

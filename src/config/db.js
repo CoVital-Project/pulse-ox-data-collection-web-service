@@ -4,10 +4,9 @@ import Promise from 'bluebird';
 mongoose.Promise = Promise;
 
 const options = {
-  reconnectTries: 5,
   // simoes - don't buffer requests to mongo in models.
   // buffering causes errors to show up asynchronously in models, not in the connection components.
-  useUnifiedTopology: false,
+  useUnifiedTopology: true, // see https://mongoosejs.com/docs/deprecations.html
   bufferMaxEntries: 0,
   authSource: process.env.DBAUTHSOURCE,
   useFindAndModify: false,
@@ -26,7 +25,11 @@ const dbPassword = process.env.DBPASSWORD;
 const dbAddress = process.env.DBADDRESS;
 const dbPort = process.env.DBPORT || 27017;
 const dbName = process.env.DBNAME;
-const dbURL = process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
+
+// MONGODB_URI is what mLab exposes by default
+const herokuDbUrl = process.env.MONGODB_URI
+
+const dbURL = herokuDbUrl || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
 const INITIAL_RETRY_INTERVAL_MS = 2000;
 const MAX_RETRY_INTERVAL_MS = 30000;
