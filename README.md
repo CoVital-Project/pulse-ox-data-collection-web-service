@@ -34,8 +34,7 @@ We have a github action defined in `.github/workflows/ci.yml` that will run a ba
 
 ## Running in Docker:
 
-__NOTE:__ We have a circular dependency issue since we need to run the mongo init script (`mongo-db-setup.sh`) before the pulse webservice can successfully start, but mongo has to be up to run the script. Currently this just means you have to `docker-compose up` twice: Once to get mongo up, and another after you've run the mongo DB setup script. What we should
-do soon is make the webservice more resilient to mongo failures and just have it continously retry to connect (with exponential backoff).
+__NOTE:__ The Pulse web service will fail to connect to Mongo until you run the `mongo-db-setup.sh` script. Once you do, the service will automatically connect to mongo.
 
 - Build the covital image: `docker build -t covital/ingress .`
 - Compose up the platform: `docker-compose -f devops/docker/compose/docker-compose.yml up -d --no-recreate`
