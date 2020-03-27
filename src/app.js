@@ -22,7 +22,6 @@ app.set('port', port);
     console.info('[init] Successfuly connected to mongodb');
   } catch (err) {
     console.info('[init] Mongodb connect error:\n', err);
-    process.exit(2);
   }
 
   // migrate.load(
