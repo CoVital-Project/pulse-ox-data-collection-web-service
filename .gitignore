@@ -8,6 +8,7 @@ node_modules
 
 # compiled assets
 dist/*
+clients/*
 
 # asdf local version selector for node, npm, etc
 .tool-versions
