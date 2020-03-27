@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "PulseOx metrics collection backend spike",
   "engines": {
-    "node": "~> 13.8.0",
+    "node": "~> 13.11.0",
     "npm": ">= 6.13.7"
   },
   "main": "src/openapi-app.js",
