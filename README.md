@@ -51,11 +51,17 @@ The postman collection is stored in this repo under [docs/postman/pulse-collecti
 
 ## Testing the web service manually via SwaggerUI
 - Locally: http://localhost:9000/api-docs
+- Dev sandbox: https://pulseox-sandbox.herokuapp.com/
 - Staging: https://guarded-crag-28391.herokuapp.com/api-docs/
 - Production: N/A
 
-## Staging server
-See https://guarded-crag-28391.herokuapp.com/api-docs/ for interactive API playground with documentation.
+## Staging and dev sandbox servers
+Integrators: See https://guarded-crag-28391.herokuapp.com/api-docs/ for interactive API playground with documentation.
+
+Backend developers: see the dev sandbox server at https://pulseox-sandbox.herokuapp.com
+
+### Accessing heroku as a developer/operator
+Contact @dpritchett to be added to the [CoVital Heroku team](https://dashboard.heroku.com/teams/covital/apps) for managing our deployments.
 
 ## Client libraries for submitting data (mobile, web, etc)
 
