@@ -212,13 +212,13 @@
                   "type": "object",
                   "properties": {
                     "BPM": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "SPO2": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "Temperature": {
-                      "type": "string"
+                      "type": "number"
                     },
                     "location": {
                       "type": "object",
