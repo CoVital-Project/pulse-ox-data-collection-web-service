@@ -41,6 +41,10 @@ class ConnectionRetryHandler {
     this._initialRetryInterval = initialRetryInterval;
     this._maxRetryInterval = maxRetryInterval;
     
+    mongoose.connection.on('close', () => {
+      this.waitForReconnect();
+    });
+
     mongoose.connection.on('disconnected', () => {
       this.waitForReconnect();
     });
