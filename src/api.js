@@ -1,48 +1,69 @@
 const OpenAPIBackend = require('openapi-backend').default;
-const schema = require('./schema');
-
+const apiSchema = require('./api_schema');
 import { User } from './model/user-auto';
 
-const postUsers = (c, req, res) => {
+const returns = {
+  success: (c, req, res) => {
+    return result => {
+      res
+        .status(200)
+        .json({ result: result, operationId: c.operation.operationId });
+    };
+  },
+  failure: (c, req, res) => {
+    return err => {
+      res.status(500).json({ err: err, operationId: c.operation.operationId });
+    };
+  }
+};
+
+const handlers = {
+  postUsers: (c, req, res) => {
     let userData = req.body;
 
-    User.create(userData).
-    then((result) => {
-        res.status(200).json({ result: result, operationId: c.operation.operationId })
-    }).catch((err) => {
-        res.status(500).json({err: err, operationId: c.operation.operationId })
-    });
-};
+    User.create(userData)
+      .then(returns.success(c, req, res))
+      .catch(returns.failure(c, req, res));
+  },
 
-const getUser = (c, req, res) => {
+  returnSuccess: (c, req, res) => {
+    return result => {
+      res
+        .status(200)
+        .json({ result: result, operationId: c.operation.operationId });
+    };
+  },
+
+  returnFailure: (c, req, res) => {
+    return err => {
+      res.status(500).json({ err: err, operationId: c.operation.operationId });
+    };
+  },
+
+  getUser: (c, req, res) => {
     let userId = c.request.params.userid;
 
-    User.findOne({ uid: userId}).
-    then((result) => {
-        res.status(200).json({ result: result, operationId: c.operation.operationId })
-    }).catch((err) => {
-        res.status(500).json({err: err, operationId: c.operation.operationId })
-    });
-};
+    User.findOne({ uid: userId })
+      .then(returns.success(c, req, res))
+      .catch(returns.failure(c, req, res));
+  },
 
-const getUsers = (c, req, res) => {
-    User.find({}).
-    then((result) => {
-        res.status(200).json({ result: result, operationId: c.operation.operationId })
-    }).catch((err) => {
-        res.status(500).json({err: err, operationId: c.operation.operationId })
-    });
+  getUsers: (c, req, res) => {
+    User.find({})
+      .then(returns.success(c, req, res))
+      .catch(returns.failure(c, req, res));
+  }
 };
 
 // define api
 const api = new OpenAPIBackend({
-    definition: schema,
-    handlers: {
-        'get-users': getUsers,
-        'get-users-userid': getUser,
-        'post-users': postUsers,
-        'notFound': (c, req, res) => res.status(404).json({err: 'not found'})
-    }
+  definition: apiSchema,
+  handlers: {
+    'get-users': handlers.getUsers,
+    'get-users-userid': handlers.getUser,
+    'post-users': handlers.postUsers,
+    notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
+  }
 });
 
 module.exports.api = api;

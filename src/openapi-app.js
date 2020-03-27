@@ -1,10 +1,10 @@
 import {} from 'dotenv/config'; //tricky - Improve
 import express from 'express';
-import {mongooseConnect} from './config/db';
+import { mongooseConnect } from './config/db';
 
 const swaggerUi = require('swagger-ui-express');
 
-const swaggerDocument = require('./schema');
+const swaggerDocument = require('./api_schema');
 const api = require('./api').api;
 
 const app = express();
@@ -22,16 +22,16 @@ app.use((req, res) => api.handleRequest(req, req, res));
 
 // Tasks to run on start up
 (async () => {
-    try {
-        await mongooseConnect();
+  try {
+    await mongooseConnect();
 
-        console.info('[init] Successfuly connected to mongodb');
-    } catch (err) {
-        console.info('[init] Mongodb connect error:\n', err);
-        process.exit(2);
-    }
+    console.info('[init] Successfuly connected to mongodb');
+  } catch (err) {
+    console.info('[init] Mongodb connect error:\n', err);
+    process.exit(2);
+  }
 })();
 // start server
 app.listen(port, () =>
-    console.log(`Covital backend listening on port ${port}...`)
+  console.log(`Covital backend listening on port ${port}...`)
 );

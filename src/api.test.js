@@ -2,7 +2,7 @@
 const sum = require('./sum');
 
 test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
+  expect(sum(1, 2)).toBe(3);
 });
 
 const api = require('./api').api;
@@ -10,7 +10,6 @@ api.init();
 
 let User = api.inputDocument.components.schemas.User;
 
-
 test('it has a User schema', () => {
-    //expect(User).toBe(1);
+  //expect(User).toBe(1);
 });
