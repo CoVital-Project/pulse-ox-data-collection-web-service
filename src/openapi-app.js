@@ -16,6 +16,9 @@ app.use(express.json());
 api.init();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get('/', (req, res) => { res.redirect('/api-docs') });
 
 // use as express middleware
 app.use((req, res) => api.handleRequest(req, req, res));
