@@ -4,14 +4,15 @@ import Promise from 'bluebird';
 mongoose.Promise = Promise;
 
 const options = {
-  reconnectTries: 5,
   // simoes - don't buffer requests to mongo in models.
   // buffering causes errors to show up asynchronously in models, not in the connection components.
-  useUnifiedTopology: false,
+  useUnifiedTopology: true, // see https://mongoosejs.com/docs/deprecations.html
   bufferMaxEntries: 0,
-  authSource: process.env.DBAUTHSOURCE,
   useFindAndModify: false,
   useNewUrlParser: true
+
+  // disabling initially because mLab's MONGODB_URI on heroku doesn't work with this out of the box
+  //authSource: process.env.DBAUTHSOURCE
 };
 
 /*
@@ -26,7 +27,11 @@ const dbPassword = process.env.DBPASSWORD;
 const dbAddress = process.env.DBADDRESS;
 const dbPort = process.env.DBPORT || 27017;
 const dbName = process.env.DBNAME;
-const dbURL = process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
+
+// MONGODB_URI is what mLab exposes by default
+const herokuDbUrl = process.env.MONGODB_URI
+
+const dbURL = herokuDbUrl || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
 const INITIAL_RETRY_INTERVAL_MS = 2000;
 const MAX_RETRY_INTERVAL_MS = 30000;
@@ -38,6 +43,10 @@ class ConnectionRetryHandler {
     this._initialRetryInterval = initialRetryInterval;
     this._maxRetryInterval = maxRetryInterval;
     
+    mongoose.connection.on('close', () => {
+      this.waitForReconnect();
+    });
+
     mongoose.connection.on('disconnected', () => {
       this.waitForReconnect();
     });
@@ -51,7 +60,7 @@ class ConnectionRetryHandler {
     // Don't try while waiting for a reconnect
     if(this._inReconnectWait) return;
 
-    console.info('Connection to Mongo is gone. Trying to reconnect...');
+    console.info('No open connection to Mongo. Trying to (re)connect...');
 
     this._inReconnectWait = true;
 
@@ -60,7 +69,7 @@ class ConnectionRetryHandler {
 
     try {
       await mongoose.connect(dbURL, options);
-      console.log('Successfully reconnected to Mongo!');
+      console.log('Successfully connected to Mongo!');
       this._inReconnectWait = false;
     } catch(err) {
       console.error(`Still unable to connect to mongo. Trying again in ${nextInterval / 1000} seconds`)
