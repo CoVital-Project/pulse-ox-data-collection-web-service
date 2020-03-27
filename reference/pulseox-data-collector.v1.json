@@ -1,0 +1,287 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "pulseox data collector",
+    "version": "1.0",
+    "description": "",
+    "license": {
+      "name": "GPLv3"
+    }
+  },
+  "servers": [
+    {
+      "description": "staging",
+      "url": "https://guarded-crag-28391.herokuapp.com"
+    },
+    {
+      "description": "development",
+      "url": "http://localhost:9000"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "",
+        "operationId": "post-users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "userid",
+          "in": "path",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users-userid"
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-users-userid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "Possibly received from our auth frontend."
+          },
+          "diagnoses": {
+            "type": "object",
+            "required": [
+              "timestamp"
+            ],
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "questions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "questionID": {
+                      "type": "string"
+                    },
+                    "answer": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "questionID",
+                    "answer",
+                    "timestamp"
+                  ]
+                }
+              },
+              "status": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "status",
+                    "timestamp"
+                  ]
+                }
+              },
+              "symptoms": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "symptom": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "severity": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "timestamp",
+                          "severity"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "symptom"
+                  ]
+                }
+              },
+              "readings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "BPM": {
+                      "type": "number"
+                    },
+                    "SPO2": {
+                      "type": "number"
+                    },
+                    "Temperature": {
+                      "type": "number"
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "Point"
+                          ]
+                        },
+                        "coordinates": {
+                          "type": "array",
+                          "maxItems": 2,
+                          "minItems": 2,
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "timestamp": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "coordinates",
+                        "timestamp"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "BPM",
+                    "SPO2",
+                    "Temperature"
+                  ]
+                }
+              }
+            }
+          },
+          "age": {
+            "type": "number"
+          },
+          "role": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "schema_version": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "uid",
+          "age",
+          "gender",
+          "schema_version"
+        ],
+        "x-examples": {
+          "User Example 1": {}
+        },
+        "description": "User model contains one person's entire pulse oximetry data collection history in a single document."
+      }
+    }
+  }
+}

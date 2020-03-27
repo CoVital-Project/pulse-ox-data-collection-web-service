@@ -26,7 +26,7 @@ const dbPassword = process.env.DBPASSWORD;
 const dbAddress = process.env.DBADDRESS;
 const dbPort = process.env.DBPORT || 27017;
 const dbName = process.env.DBNAME;
-const dbURL = `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
+const dbURL = process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
 const INITIAL_RETRY_INTERVAL_MS = 2000;
 const MAX_RETRY_INTERVAL_MS = 30000;

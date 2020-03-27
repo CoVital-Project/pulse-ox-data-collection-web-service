@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "PulseOx metrics collection backend spike",
   "engines": {
-    "node": "~> 13.8.0",
+    "node": "~> 13.11.0",
     "npm": ">= 6.13.7"
   },
-  "main": "src/app.js",
+  "main": "src/openapi-app.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
-    "start": "babel-node --presets es2015 ./src/app.js",
-    "start-docker": "babel-node --presets es2015 ./src/app.js dotenv_config_path=/app/conf/.env",
+    "start": "node --require @babel/register src/openapi-app.js",
+    "start-docker": "node --require @babel/register src/openapi-app.js dotenv_config_path=/app/conf/.env",
+    "build": "babel src --out-dir dist",
     "ci-build": "npm run lint && npm run test && npm run build --if-present"
   },
   "repository": {
@@ -26,18 +27,27 @@
   },
   "homepage": "https://github.com/CoVital-Project/node-mongo-backend-spike#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
+    "@openapi-contrib/openapi-schema-to-json-schema": "^3.0.0",
     "babel-preset-es2015": "^6.24.1",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "json-schema-to-mongoose": "^0.2.2",
     "migrate": "^1.6.2",
     "mongo-sanitize": "^1.1.0",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.6",
     "mongoose-paginate-v2": "^1.3.6",
     "morgan": "^1.10.0",
+    "openapi-backend": "^2.3.8",
+    "swagger-mongoose": "^1.1.2",
+    "swagger-ui-express": "^4.1.4",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -51,6 +61,7 @@
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "mongo": "^0.1.0",
+    "openapi-enforcer": "^1.10.1",
     "prettier-eslint": "^9.0.1"
   }
 }
