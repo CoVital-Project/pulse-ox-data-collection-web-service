@@ -14,6 +14,10 @@
       "url": "https://guarded-crag-28391.herokuapp.com"
     },
     {
+      "description": "sandbox",
+      "url": "https://pulseox-sandbox.herokuapp.com/"
+    },
+    {
       "description": "development",
       "url": "http://localhost:9000"
     }
