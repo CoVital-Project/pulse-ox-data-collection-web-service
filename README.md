@@ -60,6 +60,8 @@ Integrators: See https://guarded-crag-28391.herokuapp.com/api-docs/ for interact
 
 Backend developers: see the dev sandbox server at https://pulseox-sandbox.herokuapp.com
 
+*ALL `master` builds on github automatically deploy to the sandbox. @dpritchett or @haggy can click a button to promote sandbox releases to staging. Let us know if this flow needs adjustment!
+
 ### Accessing heroku as a developer/operator
 Contact @dpritchett to be added to the [CoVital Heroku team](https://dashboard.heroku.com/teams/covital/apps) for managing our deployments.
 
