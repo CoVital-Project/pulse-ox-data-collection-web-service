@@ -6,6 +6,8 @@ ADD . /app
 
 WORKDIR /app
 
+RUN mkdir conf
+
 ENV debs python build-essential git-core
 
 RUN apt-get update -q && \
@@ -14,4 +16,4 @@ RUN apt-get update -q && \
 
 RUN npm ci
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start-docker"]

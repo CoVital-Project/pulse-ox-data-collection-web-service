@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "start": "babel-node --presets es2015 ./src/app.js",
+    "start-docker": "babel-node --presets es2015 ./src/app.js dotenv_config_path=/app/conf/.env",
     "ci-build": "npm run lint && npm run test && npm run build --if-present"
   },
   "repository": {
