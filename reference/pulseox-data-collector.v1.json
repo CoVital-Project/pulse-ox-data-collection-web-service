@@ -122,7 +122,7 @@
             "description": "Possibly received from our auth frontend."
           },
           "diagnoses": {
-            "type": "object",
+            "type": "array",
             "required": [
               "timestamp"
             ],
