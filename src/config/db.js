@@ -28,7 +28,53 @@ const dbPort = process.env.DBPORT || 27017;
 const dbName = process.env.DBNAME;
 const dbURL = process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbAddress}:${dbPort}/${dbName}`;
 
-export function mongooseConnect() {
+const INITIAL_RETRY_INTERVAL_MS = 2000;
+const MAX_RETRY_INTERVAL_MS = 30000;
+
+class ConnectionRetryHandler {
+
+  constructor(initialRetryInterval, maxRetryInterval) {
+    this._inReconnectWait = false;
+    this._initialRetryInterval = initialRetryInterval;
+    this._maxRetryInterval = maxRetryInterval;
+    
+    mongoose.connection.on('disconnected', () => {
+      this.waitForReconnect();
+    });
+  }
+
+  async tryInitialConnect() {
+    await this.waitForReconnect();
+  }
+
+  async waitForReconnect(currentRetryInterval) {
+    // Don't try while waiting for a reconnect
+    if(this._inReconnectWait) return;
+
+    console.info('Connection to Mongo is gone. Trying to reconnect...');
+
+    this._inReconnectWait = true;
+
+    let thisInterval = currentRetryInterval ? currentRetryInterval : this._initialRetryInterval;
+    let nextInterval = Math.min(thisInterval * 2, this._maxRetryInterval);
+
+    try {
+      await mongoose.connect(dbURL, options);
+      console.log('Successfully reconnected to Mongo!');
+      this._inReconnectWait = false;
+    } catch(err) {
+      console.error(`Still unable to connect to mongo. Trying again in ${nextInterval / 1000} seconds`)
+      setTimeout(() => {
+        this._inReconnectWait = false;
+        this.waitForReconnect(nextInterval);
+      }, nextInterval);
+    }
+  }
+}
+
+const connHandler = new ConnectionRetryHandler(INITIAL_RETRY_INTERVAL_MS, MAX_RETRY_INTERVAL_MS);
+
+export async function mongooseConnect() {
   mongoose.set('useNewUrlParser', true);
   mongoose.set('useFindAndModify', false);
   mongoose.set('useCreateIndex', true);
@@ -36,7 +82,7 @@ export function mongooseConnect() {
 
   console.info('Connecting to mongo: ' + dbURL);
 
-  return mongoose.connect(dbURL, options);
+  await connHandler.tryInitialConnect();
 }
 
 export function mongooseDisconnect() {

@@ -1,5 +1,7 @@
+import {} from 'dotenv/config'; //tricky - Improve
 import express from 'express';
 import {mongooseConnect} from './config/db';
+
 const swaggerUi = require('swagger-ui-express');
 
 const swaggerDocument = require('./schema');

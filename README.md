@@ -11,7 +11,7 @@ Prototypes for Hugo Esteves et al to get some node API services + NoSQL backend 
 - Verify basic web app boots with `node src/app.js`
 - View the app in your browser at [http://localhost:3000/](http://localhost:3000/) -->
 
-## Getting started:
+## Getting started (locally):
 
 - .env file filled with the credencials of you mongoDB
   NODE_ENV=development
@@ -33,10 +33,19 @@ We have a github action defined in `.github/workflows/ci.yml` that will run a ba
 - `npm run ci-build`
 
 ## Running in Docker:
-We are looking to set up Docker compose eventually but for now we have a simple Dockerfile for you:
-- `docker build -t covital/ingress .`
-- `docker run -t covital/ingress`
 
+__NOTE:__ The Pulse web service will fail to connect to Mongo until you run the `mongo-db-setup.sh` script. Once you do, the service will automatically connect to mongo.
+
+- Build the covital image: `docker build -t covital/ingress .`
+- Compose up the platform: `docker-compose -f devops/docker/compose/docker-compose.yml up -d --no-recreate`
+- Init mongo database: `cd devops && ./mongo-db-setup.sh`
+- Re-run compose up to bring the web service up: `docker-compose -f devops/docker/compose/docker-compose.yml up -d --no-recreate`
+- Check that all services are running: `docker-compose -f devops/docker/compose/docker-compose.yml ps`
+- cUrl or use Postman to verify the edge is running: `curl -v  -XGET 'http://localhost:3000/diagnoses'`
+
+## Testing the web service in Postman
+If you don't have Postman you can download it [here](https://www.postman.com/downloads/). 
+The postman collection is stored in this repo under [docs/postman/pulse-collection.json](docs/postman/pulse-collection.json)
 
 ## Appdev TODOs
 

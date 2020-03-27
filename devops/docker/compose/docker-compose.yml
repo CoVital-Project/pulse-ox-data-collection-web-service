@@ -1,0 +1,18 @@
+version: '3'
+services:
+  pulse-ws:
+    image: covital/ingress:latest
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./volumes/pulse_ws/conf:/app/conf
+    depends_on: 
+      - mongo
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: covital
+      MONGO_INITDB_ROOT_PASSWORD: covital*backend
+    ports: 
+      - 27017:27017
