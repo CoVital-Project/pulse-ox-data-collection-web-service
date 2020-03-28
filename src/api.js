@@ -1,3 +1,5 @@
+import {requiresAuth} from 'express-openid-connect';
+
 const OpenAPIBackend = require('openapi-backend').default;
 const apiSchema = require('./api_schema');
 import { User } from './model/user-auto';
@@ -49,6 +51,7 @@ const handlers = {
   },
 
   getUsers: (c, req, res) => {
+    requiresAuth();
     User.find({})
       .then(returns.success(c, req, res))
       .catch(returns.failure(c, req, res));

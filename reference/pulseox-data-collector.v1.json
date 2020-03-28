@@ -19,7 +19,7 @@
     },
     {
       "description": "development",
-      "url": "http://localhost:9000"
+      "url": "https://localhost:9000"
     }
   ],
   "paths": {
@@ -59,7 +59,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "openId": []
+          }
+        ]
       }
     },
     "/users/{userid}": {
@@ -289,7 +294,13 @@
           "schema_version"
         ]
       }
+    },
+    "securitySchemes": {
+      "openId": {
+        "type": "openIdConnect",
+        "openIdConnectUrl": "https://he-sandbox.auth0.com",
+        "description": "Auth0 HE Sandbox"
+      }
     }
   }
 }
-

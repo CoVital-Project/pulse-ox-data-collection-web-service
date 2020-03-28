@@ -1,6 +1,9 @@
 # local docker db backend
 mongo-volume
 
+# localhost testing SSL
+*.pem
+
 # package downloads
 node_modules
 .env
