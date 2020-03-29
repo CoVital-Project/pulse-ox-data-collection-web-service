@@ -1,0 +1,8 @@
+{
+  "name": "CoVital Pulse Oximetry Ingress",
+  "description": "CoVital Pulse Oximetry Ingress",
+  "repository": "https://github.com/CoVital-Project/pulse-ox-data-collection-web-service",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}

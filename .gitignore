@@ -1,6 +1,14 @@
+# local docker db backend
+mongo-volume
+
 # package downloads
 node_modules
 .env
+.envrc
+
+# compiled assets
+dist/*
+clients/*
 
 # asdf local version selector for node, npm, etc
 .tool-versions
@@ -10,3 +18,6 @@ node_modules
 *.swp
 *.swo
 *~
+
+# local os stuff
+.DS_Store

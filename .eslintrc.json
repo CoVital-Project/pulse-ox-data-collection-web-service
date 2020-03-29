@@ -2,7 +2,7 @@
   "root": true,
   "extends": ["eslint:recommended", "prettier/babel"],
   "plugins": ["jest"],
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": ["node_modules/", "dist/", "clients/"],
   "parserOptions": {
     "parser": "babel-eslint",
     "ecmaVersion": 8,
