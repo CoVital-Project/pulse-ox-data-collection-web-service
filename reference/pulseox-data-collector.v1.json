@@ -27,6 +27,26 @@
       "get": {
         "summary": "Retrieves a signed upload request",
         "operationId": "get-signed-upload-req",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filename",
+            "description": "The name of the file you want to upload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filetype",
+            "description": "The type of file you want to upload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
