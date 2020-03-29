@@ -34,6 +34,8 @@ We have a github action defined in `.github/workflows/ci.yml` that will run a ba
 
 ## Running in Docker:
 
+Install [Docker Compose](https://docs.docker.com/compose/install/) if you haven't already.
+
 __NOTE:__ The Pulse web service will fail to connect to Mongo until you run the `mongo-db-setup.sh` script. Once you do, the service will automatically connect to mongo.
 
 - Build the covital image: `docker build -t covital/ingress .`
