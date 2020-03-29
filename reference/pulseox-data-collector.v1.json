@@ -437,6 +437,9 @@
                           "coordinates",
                           "timestamp"
                         ]
+                      },
+                      "VideoAnalysisData": {
+                        "type": "string"
                       }
                     },
                     "required": [
@@ -445,9 +448,6 @@
                       "Temperature"
                     ]
                   }
-                },
-                "": {
-                  "type": "string"
                 }
               },
               "required": [
