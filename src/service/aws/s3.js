@@ -1,4 +1,4 @@
-const AWS = require("aws-sdk");
+const AWS = require('aws-sdk');
 
 export default class S3Service {
   constructor(defaultVideoUploadBucket, region = 'us-east-2') {
