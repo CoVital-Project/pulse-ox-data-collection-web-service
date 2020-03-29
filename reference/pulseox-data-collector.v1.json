@@ -228,16 +228,7 @@
             "description": "OK"
           }
         },
-        "operationId": "get-session-diagnoses",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        }
+        "operationId": "get-session-diagnoses"
       }
     },
     "/session/diagnoses/{diagid}": {
