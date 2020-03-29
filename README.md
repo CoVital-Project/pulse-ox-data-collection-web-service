@@ -75,6 +75,10 @@ See the [Releases page](https://github.com/CoVital-Project/pulse-ox-data-collect
 ### Build your own against the latest `master` commit
 Clone this repo and run `make` to generate client bindings for multiple languages.
 
+## AWS Integration
+There are some endpoints (such as generating signed S3 upload requests) that need AWS access in order to work. You'll
+need credentials setup in one of the places detailed [here](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html). 
+
 ## Appdev TODOs
 
 See the [GitHub issues for this project](https://github.com/CoVital-Project/pulse-ox-data-collection-web-service/issues).
