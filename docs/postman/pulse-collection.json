@@ -6,26 +6,26 @@
 	},
 	"item": [
 		{
-			"name": "Get All Diagnoses",
+			"name": "Get All Users",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{PULSE_HOST}}:{{PULSE_PORT}}/diagnoses",
+					"raw": "http://{{PULSE_HOST}}:{{PULSE_PORT}}/users",
 					"protocol": "http",
 					"host": [
 						"{{PULSE_HOST}}"
 					],
 					"port": "{{PULSE_PORT}}",
 					"path": [
-						"diagnoses"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Create Diagnoses",
+			"name": "Create User",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -51,19 +51,70 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Signed Upload Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{PULSE_HOST}}:{{PULSE_PORT}}/signed-upload?filename=[[filename]]&filetype=[[filetype]]",
+					"protocol": "http",
+					"host": [
+						"{{PULSE_HOST}}"
+					],
+					"port": "{{PULSE_PORT}}",
+					"path": [
+						"signed-upload"
+					],
+					"query": [
+						{
+							"key": "filename",
+							"value": "[[filename]]"
+						},
+						{
+							"key": "filetype",
+							"value": "[[filetype]]"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "01afdfd4-8767-4ad6-894b-743cd11e7a55",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c713744d-7de5-4f8e-91d4-778fa3a64b38",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
-			"id": "2f2dc38b-7a69-4819-a4ba-3f3bcfa2a9be",
+			"id": "0c923517-e80b-4186-875d-d73b60ed3702",
 			"key": "PULSE_HOST",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "59ccd039-8393-4c9d-9d09-0f85d0ac609c",
+			"id": "e4f78d51-d539-4eb4-bccd-adf0f473f097",
 			"key": "PULSE_PORT",
-			"value": "3000",
+			"value": "9000",
 			"type": "string"
 		}
 	],

@@ -36,6 +36,8 @@ We have a github action defined in `.github/workflows/ci.yml` that will run a ba
 
 ## Running in Docker:
 
+Install [Docker Compose](https://docs.docker.com/compose/install/) if you haven't already.
+
 __NOTE:__ The Pulse web service will fail to connect to Mongo until you run the `mongo-db-setup.sh` script. Once you do, the service will automatically connect to mongo.
 
 - Build the covital image: `docker build -t covital/ingress .`
@@ -72,6 +74,10 @@ See the [Releases page](https://github.com/CoVital-Project/pulse-ox-data-collect
 
 ### Build your own against the latest `master` commit
 Clone this repo and run `make` to generate client bindings for multiple languages.
+
+## AWS Integration
+There are some endpoints (such as generating signed S3 upload requests) that need AWS access in order to work. You'll
+need credentials setup in one of the places detailed [here](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html). 
 
 ## Appdev TODOs
 

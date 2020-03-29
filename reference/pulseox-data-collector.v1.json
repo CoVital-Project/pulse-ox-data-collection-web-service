@@ -23,6 +23,20 @@
     }
   ],
   "paths": {
+    "/signed-upload": {
+      "get": {
+        "summary": "Retrieves a signed upload request",
+        "operationId": "get-signed-upload-req",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "summary": "",

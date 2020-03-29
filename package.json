@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/CoVital-Project/node-mongo-backend-spike#readme",
   "dependencies": {
+    "aws-sdk": "^2.648.0",
     "@openapi-contrib/openapi-schema-to-json-schema": "^3.0.0",
     "babel-preset-es2015": "^6.24.1",
     "@babel/cli": "^7.8.4",

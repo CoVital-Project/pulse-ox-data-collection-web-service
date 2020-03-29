@@ -1,6 +1,17 @@
 const OpenAPIBackend = require('openapi-backend').default;
 const apiSchema = require('./api_schema');
 import { User } from './model/user-auto';
+import CredentialsService from './service/aws/credentials';
+import S3Service from './service/aws/s3';
+
+const env = process.env;
+
+const credsService = new CredentialsService();
+credsService.loadCredentials()
+  .then(() => console.log('Successfully loaded AWS credentials!'))
+  .catch(err => console.error(`Error loading AWS credentials! ${err.stack}`));
+
+const s3Service = new S3Service(env.VIDEO_UPLOAD_BUCKET_NAME, env.VIDEO_UPLOAD_BUCKET_REGION);
 
 const returns = {
   success: (c, req, res) => {
@@ -52,6 +63,22 @@ const handlers = {
     User.find({})
       .then(returns.success(c, req, res))
       .catch(returns.failure(c, req, res));
+  },
+
+  getSignedUploadReq: (r, req, res) => {
+    const fileName = req.query.filename;
+    const fileType = req.query.filetype;
+
+    if(!fileName || !fileType) {
+      return returns.failure(r, req, res)(new Error('You must specify filename and filetype params'));
+    }
+
+    s3Service.getSignedUploadReq(fileName, fileType)
+      .then(
+        returns.success(r, req, res),
+        returns.failure(r, req, res)
+      )
+      .catch(returns.failure(r, req, res));
   }
 };
 
@@ -62,6 +89,7 @@ const api = new OpenAPIBackend({
     'get-users': handlers.getUsers,
     'get-users-userid': handlers.getUser,
     'post-users': handlers.postUsers,
+    'get-signed-upload-req': handlers.getSignedUploadReq,
     notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
   }
 });
