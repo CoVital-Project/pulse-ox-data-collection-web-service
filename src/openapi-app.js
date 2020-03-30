@@ -9,6 +9,10 @@ const api = require('./api').api;
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+
+const auth0Tenant = process.env.AUTH0_TENANT || 'o2-monitoring-dev';
+const auth0Audience = process.env.AUTH0_AUDIENCE || 'https://pulseox-sandbox.herokuapp.com/';
+
 const checkJwt = jwt({
     // Dynamically provide a signing key
     // based on the kid in the header and 
@@ -17,12 +21,12 @@ const checkJwt = jwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `https://o2-monitoring-dev.auth0.com/.well-known/jwks.json`
+      jwksUri: 'https://' + auth0Tenant + '.auth0.com/.well-known/jwks.json'
     }),
   
     // Validate the audience and the issuer.
-    audience: 'https://pulseox-sandbox.herokuapp.com/',
-    issuer: `https://o2-monitoring-dev.auth0.com/`,
+    audience: auth0Audience,
+    issuer: 'https://' + auth0Tenant + '.auth0.com/',
     algorithms: ['RS256']
   });
   
