@@ -20,12 +20,12 @@ const checkJwt = jwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `https://he-sandbox.auth0.com/.well-known/jwks.json`
+      jwksUri: `https://o2-monitoring-dev.auth0.com/.well-known/jwks.json`
     }),
   
     // Validate the audience and the issuer.
     audience: 'https://pulseox-sandbox.herokuapp.com/',
-    issuer: `https://he-sandbox.auth0.com/`,
+    issuer: `https://o2-monitoring-dev.auth0.com/`,
     algorithms: ['RS256']
   });
   
