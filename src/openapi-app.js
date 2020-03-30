@@ -10,6 +10,26 @@ const https = require('https');
 const swaggerDocument = require('./api_schema');
 const api = require('./api').api;
 
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+const checkJwt = jwt({
+    // Dynamically provide a signing key
+    // based on the kid in the header and 
+    // the signing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://he-sandbox.auth0.com/.well-known/jwks.json`
+    }),
+  
+    // Validate the audience and the issuer.
+    audience: 'https://pulseox-sandbox.herokuapp.com/',
+    issuer: `https://he-sandbox.auth0.com/`,
+    algorithms: ['RS256']
+  });
+  
+
 const app = express();
 const port = process.env.PORT || 9000;
 app.set('port', port);
@@ -24,8 +44,11 @@ app.get('/', (req, res) => {
     res.redirect('/api-docs')
 });
 
+// validate JWT and add user to req
+app.use(checkJwt);
+
 // use as express middleware
-app.use(requiresAuth(), (req, res) => api.handleRequest(req, req, res));
+app.use((req, res) => api.handleRequest(req, req, res));
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth());
