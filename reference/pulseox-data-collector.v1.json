@@ -288,7 +288,7 @@
             "description": "Possibly received from our auth frontend."
           },
           "age": {
-            "type": "number"
+            "type": "integer"
           },
           "role": {
             "type": "string"
@@ -431,6 +431,15 @@
                       },
                       "VideoAnalysisData": {
                         "type": "string"
+                      },
+                      "Weight": {
+                        "type": "number"
+                      },
+                      "Gyroscope": {
+                        "type": "number"
+                      },
+                      "Accelerometer": {
+                        "type": "number"
                       }
                     },
                     "required": [
@@ -445,6 +454,9 @@
                 "timestamp"
               ]
             }
+          },
+          "height": {
+            "type": "number"
           }
         },
         "required": [
