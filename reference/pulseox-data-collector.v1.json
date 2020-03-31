@@ -287,13 +287,13 @@
             "type": "string",
             "description": "Possibly received from our auth frontend."
           },
-          "age": {
-            "type": "number"
+          "Age": {
+            "type": "integer"
           },
-          "role": {
+          "Role": {
             "type": "string"
           },
-          "gender": {
+          "Gender": {
             "type": "string"
           },
           "schema_version": {
@@ -431,6 +431,15 @@
                       },
                       "VideoAnalysisData": {
                         "type": "string"
+                      },
+                      "Weight": {
+                        "type": "number"
+                      },
+                      "Gyroscope": {
+                        "type": "number"
+                      },
+                      "Accelerometer": {
+                        "type": "number"
                       }
                     },
                     "required": [
@@ -445,13 +454,21 @@
                 "timestamp"
               ]
             }
+          },
+          "Height": {
+            "type": "number"
+          },
+          "SkinColor": {
+            "type": "string"
           }
         },
         "required": [
           "uid",
-          "age",
-          "gender",
-          "schema_version"
+          "Age",
+          "Gender",
+          "schema_version",
+          "Height",
+          "SkinColor"
         ]
       }
     }
