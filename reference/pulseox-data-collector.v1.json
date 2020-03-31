@@ -455,7 +455,7 @@
               ]
             }
           },
-          "height": {
+          Height": {
             "type": "number"
           }
         },
