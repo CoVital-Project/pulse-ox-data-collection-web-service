@@ -332,13 +332,13 @@
             "type": "string",
             "description": "Possibly received from our auth frontend."
           },
-          "age": {
-            "type": "number"
+          "Age": {
+            "type": "integer"
           },
-          "role": {
+          "Role": {
             "type": "string"
           },
-          "gender": {
+          "Gender": {
             "type": "string"
           },
           "schema_version": {
@@ -476,6 +476,15 @@
                       },
                       "VideoAnalysisData": {
                         "type": "string"
+                      },
+                      "Weight": {
+                        "type": "number"
+                      },
+                      "Gyroscope": {
+                        "type": "number"
+                      },
+                      "Accelerometer": {
+                        "type": "number"
                       }
                     },
                     "required": [
@@ -490,14 +499,97 @@
                 "timestamp"
               ]
             }
+          },
+          "Height": {
+            "type": "number"
+          },
+          "SkinColor": {
+            "type": "string"
           }
         },
         "required": [
           "uid",
-          "age",
-          "gender",
-          "schema_version"
+          "Age",
+          "Gender",
+          "schema_version",
+          "Height",
+          "SkinColor"
         ]
+      },
+      "Survey": {
+        "title": "Survey",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "bpm": {
+            "type": "integer"
+          },
+          "spo2": {
+            "type": "integer"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "gyroscope": {
+            "type": "number"
+          },
+          "accelerometer": {
+            "type": "number"
+          },
+          "skin_color": {
+            "type": "string"
+          },
+          "phone_brand": {
+            "type": "string"
+          },
+          "phone_reference": {
+            "type": "string"
+          },
+          "reference_ground_truth_measurement_system": {
+            "type": "string"
+          },
+          "brand_ground_truth_measurement_system": {
+            "type": "string"
+          },
+          "video_data": {
+            "type": "string"
+          },
+          "covid": {
+            "type": "string"
+          },
+          "asthma": {
+            "type": "string"
+          },
+          "copd": {
+            "type": "string"
+          },
+          "smoker": {
+            "type": "string"
+          },
+          "cardio_disease": {
+            "type": "string"
+          },
+          "ild": {
+            "type": "string"
+          },
+          "shortness_breath": {
+            "type": "string"
+          }
+        }
       }
     }
   }

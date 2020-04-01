@@ -4,5 +4,5 @@ api.init();
 let User = api.inputDocument.components.schemas.User;
 
 test('it has a User schema', () => {
-  expect(User.properties.age.type).toEqual('number');
+  expect(User.properties.Age.type).toEqual('integer');
 });
