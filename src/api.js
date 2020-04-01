@@ -91,7 +91,7 @@ const handlers = {
   batchedSignedUploadReq: (r, req, res) => {
     const files = req.body.files;
     const surveyId = req.body.surveyId;
-    if(!files || !surveyId) return returns.failure(r, req, res)(new Error("'surveyId' and 'files' must be specified in order to retrieve signed URLs"));
+    if(!files || !surveyId) return returns.failure(r, req, res)(new Error('[surveyId] and [files] must be specified in order to retrieve signed URLs'));
 
     s3Service.batchedSignedUploadReqs(surveyId, files)
       .then(
