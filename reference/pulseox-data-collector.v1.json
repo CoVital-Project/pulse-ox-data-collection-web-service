@@ -78,12 +78,10 @@
                       "properties": {
                         "name": {
                           "type": "string",
-                          "required": "true",
                           "description": "The file name"
                         },
                         "extension": {
                           "type": "string",
-                          "required": "true",
                           "description": "The file extension"
                         }
                       }
