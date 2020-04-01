@@ -55,6 +55,21 @@
             "description": "Bad request"
           }
         }
+      },
+      "post": {
+        "summary": "Allows batch creation of signed upload URLs when many files need to be uploaded",
+        "operationId": "batch-signed-upload-req",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
       }
     },
     "/users": {
