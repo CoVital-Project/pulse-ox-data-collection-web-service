@@ -59,12 +59,44 @@
       "post": {
         "summary": "Allows batch creation of signed upload URLs when many files need to be uploaded",
         "operationId": "batch-signed-upload-req",
-        "parameters": [
-
-        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "surveyId": {
+                    "type": "string",
+                    "description": "The ID of the survey in context",
+                    "format": "uuid"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "required": "true",
+                          "description": "The file name"
+                        },
+                        "extension": {
+                          "type": "string",
+                          "required": "true",
+                          "description": "The file extension"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "A list of signed URL objects"
           },
           "400": {
             "description": "Bad request"
