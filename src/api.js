@@ -81,7 +81,9 @@ const handlers = {
       return returns.failure(r, req, res)(new Error('You must specify filename and filetype params'));
     }
 
-    s3Service.getSignedUploadReq(fileName, fileType)
+    const surveyId = uuidv4();
+
+    s3Service.getSignedUploadReq(surveyId, fileName, fileType)
       .then(
         returns.success(r, req, res),
         returns.failure(r, req, res)
