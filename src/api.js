@@ -3,6 +3,7 @@ const apiSchema = require('./api_schema');
 import { User } from './model/user-auto';
 import CredentialsService from './service/aws/credentials';
 import S3Service from './service/aws/s3';
+import { v4 as uuidv4 } from 'uuid';
 
 const env = process.env;
 
@@ -25,7 +26,7 @@ const returns = {
     return result => {
       res
         .status(200)
-        .json({ result: result, operationId: c.operation.operationId });
+        .json(result);
     };
   },
   failure: (c, req, res) => {
@@ -90,12 +91,18 @@ const handlers = {
 
   batchedSignedUploadReq: (r, req, res) => {
     const files = req.body.files;
-    const surveyId = req.body.surveyId;
-    if(!files || !surveyId) return returns.failure(r, req, res)(new Error('[surveyId] and [files] must be specified in order to retrieve signed URLs'));
+    if(!files) return returns.failure(r, req, res)(new Error('[files] must be specified in order to retrieve signed URLs'));
+
+    const surveyId = uuidv4();
 
     s3Service.batchedSignedUploadReqs(surveyId, files)
       .then(
-        returns.success(r, req, res),
+        signedUploadRes => {
+          returns.success(r, req, res)({
+            surveyId: surveyId,
+            signedRequests: signedUploadRes
+          });
+        },
         returns.failure(r, req, res)
       )
       .catch(returns.failure(r, req, res));

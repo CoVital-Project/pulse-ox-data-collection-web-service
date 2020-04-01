@@ -66,11 +66,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "surveyId": {
-                    "type": "string",
-                    "description": "The ID of the survey in context",
-                    "format": "uuid"
-                  },
                   "files": {
                     "type": "array",
                     "items": {
@@ -94,7 +89,7 @@
         },
         "responses": {
           "200": {
-            "description": "A list of signed URL objects"
+            "description": "The survey ID and a list of signed URL objects"
           },
           "400": {
             "description": "Bad request"
