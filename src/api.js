@@ -11,7 +11,14 @@ credsService.loadCredentials()
   .then(() => console.log('Successfully loaded AWS credentials!'))
   .catch(err => console.error(`Error loading AWS credentials! ${err.stack}`));
 
-const s3Service = new S3Service(env.VIDEO_UPLOAD_BUCKET_NAME, env.VIDEO_UPLOAD_BUCKET_REGION);
+const envSignedTTL = parseInt(env.SIGNED_URL_TTL);  
+const signedUrlTTL = !isNaN(envSignedTTL) ? envSignedTTL : 60; // Set low default just in case 
+
+const s3Service = new S3Service(
+  env.VIDEO_UPLOAD_BUCKET_NAME, 
+  env.VIDEO_UPLOAD_BUCKET_REGION,
+  signedUrlTTL
+);
 
 const returns = {
   success: (c, req, res) => {
@@ -79,6 +86,19 @@ const handlers = {
         returns.failure(r, req, res)
       )
       .catch(returns.failure(r, req, res));
+  },
+
+  batchedSignedUploadReq: (r, req, res) => {
+    const files = req.body.files;
+    const surveyId = req.body.surveyId;
+    if(!files || !surveyId) return returns.failure(r, req, res)(new Error('[surveyId] and [files] must be specified in order to retrieve signed URLs'));
+
+    s3Service.batchedSignedUploadReqs(surveyId, files)
+      .then(
+        returns.success(r, req, res),
+        returns.failure(r, req, res)
+      )
+      .catch(returns.failure(r, req, res));
   }
 };
 
@@ -90,6 +110,7 @@ const api = new OpenAPIBackend({
     'get-users-userid': handlers.getUser,
     'post-users': handlers.postUsers,
     'get-signed-upload-req': handlers.getSignedUploadReq,
+    'batch-signed-upload-req': handlers.batchedSignedUploadReq,
     notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
   }
 });
