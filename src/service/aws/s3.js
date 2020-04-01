@@ -1,4 +1,4 @@
-import { Promise } from "bluebird";
+import { Promise } from 'bluebird';
 
 const AWS = require('aws-sdk');
 
@@ -55,6 +55,6 @@ export default class S3Service {
   }
 
   _leftPadNumber(num, maxLength = 2, fillStr = '0') {
-    return num.toString().padStart(maxLength, '0');
+    return num.toString().padStart(maxLength, fillStr);
   }
 }
