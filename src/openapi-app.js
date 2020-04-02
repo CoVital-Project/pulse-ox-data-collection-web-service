@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 });
 
 // validate JWT and add user to req
-app.use(checkJwt);
+//app.use(checkJwt);
 
 // use as express middleware
 app.use((req, res) => api.handleRequest(req, req, res));
