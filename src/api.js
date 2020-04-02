@@ -10,7 +10,7 @@ const jwksRsa = require('jwks-rsa');
 const auth0Tenant = process.env.AUTH0_TENANT || 'o2-monitoring-dev';
 const auth0Audience = process.env.AUTH0_AUDIENCE || 'https://pulseox-sandbox.herokuapp.com/';
 
-const checkJwt = jwt({
+const validateJwt = jwt({
     // Dynamically provide a signing key
     // based on the kid in the header and 
     // the signing keys provided by the JWKS endpoint.
@@ -70,23 +70,16 @@ const handlers = {
       .then(returns.success(c, req, res))
       .catch(returns.failure(c, req, res));
   },
-
-  
-  secure: (c, req, res, handler) => {
-    let auth = (authResponse) => {
+}
+ 
+const authn = {
+  secureWithToken: (c, req, res, handler) => {
+    return validateJwt(req, res, (authResponse) => {
       if (authResponse && authResponse.code === 'credentials_required'){
         return returns.notAllowed(c, req, res)(authResponse);
       }
       return(handler(c, req, res))
-    };
-  
-    let scopes = c.operation.security.find(el => el.openId != null);
-
-    if (scopes != null){
-      return checkJwt(req, res, auth);
-    }
-
-    return handler(c, req, res);
+    });
   }
 };
 
@@ -94,7 +87,7 @@ const handlers = {
 const api = new OpenAPIBackend({
   definition: apiSchema,
   handlers: {
-    'get-users': (c, req, res) => handlers.secure(c, req, res, handlers.getUsers),
+    'get-users': (c, req, res) => authn.secureWithToken(c, req, res, handlers.getUsers),
     'get-users-userid': handlers.getUser,
     'post-users': handlers.postUsers,
     notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
