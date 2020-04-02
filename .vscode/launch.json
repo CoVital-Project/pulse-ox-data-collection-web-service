@@ -5,22 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug Jest Tests",
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**"
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand"
       ],
-      "program": "${workspaceFolder}/src/app.js"
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
     },
     {
 			"type": "node",
 			"request": "launch",
 			"protocol": "inspector",
 			"name": "ES6 Debugger",
-			"program": "${workspaceFolder}/src/app.js",
-			"runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
-			"runtimeArgs": ["--presets",  "es2015"]
+			"program": "${workspaceFolder}/src/openapi-app.js",
+			//"runtimeExecutable": "node  src/openapi-app.js",
+			"runtimeArgs": ["--require", "@babel/register"]
 		}
   ]
 }

@@ -3,6 +3,7 @@ const apiSchema = require('./api_schema');
 import { User } from './model/user-auto';
 import CredentialsService from './service/aws/credentials';
 import S3Service from './service/aws/s3';
+import { v4 as uuidv4 } from 'uuid';
 
 const env = process.env;
 
@@ -11,14 +12,21 @@ credsService.loadCredentials()
   .then(() => console.log('Successfully loaded AWS credentials!'))
   .catch(err => console.error(`Error loading AWS credentials! ${err.stack}`));
 
-const s3Service = new S3Service(env.VIDEO_UPLOAD_BUCKET_NAME, env.VIDEO_UPLOAD_BUCKET_REGION);
+const envSignedTTL = parseInt(env.SIGNED_URL_TTL);  
+const signedUrlTTL = !isNaN(envSignedTTL) ? envSignedTTL : 60; // Set low default just in case 
+
+const s3Service = new S3Service(
+  env.VIDEO_UPLOAD_BUCKET_NAME, 
+  env.VIDEO_UPLOAD_BUCKET_REGION,
+  signedUrlTTL
+);
 
 const returns = {
   success: (c, req, res) => {
     return result => {
       res
         .status(200)
-        .json({ result: result, operationId: c.operation.operationId });
+        .json(result);
     };
   },
   failure: (c, req, res) => {
@@ -73,9 +81,30 @@ const handlers = {
       return returns.failure(r, req, res)(new Error('You must specify filename and filetype params'));
     }
 
-    s3Service.getSignedUploadReq(fileName, fileType)
+    const surveyId = uuidv4();
+
+    s3Service.getSignedUploadReq(surveyId, fileName, fileType)
       .then(
         returns.success(r, req, res),
+        returns.failure(r, req, res)
+      )
+      .catch(returns.failure(r, req, res));
+  },
+
+  batchedSignedUploadReq: (r, req, res) => {
+    const files = req.body.files;
+    if(!files) return returns.failure(r, req, res)(new Error('[files] must be specified in order to retrieve signed URLs'));
+
+    const surveyId = uuidv4();
+
+    s3Service.batchedSignedUploadReqs(surveyId, files)
+      .then(
+        signedUploadRes => {
+          returns.success(r, req, res)({
+            surveyId: surveyId,
+            signedRequests: signedUploadRes
+          });
+        },
         returns.failure(r, req, res)
       )
       .catch(returns.failure(r, req, res));
@@ -90,6 +119,7 @@ const api = new OpenAPIBackend({
     'get-users-userid': handlers.getUser,
     'post-users': handlers.postUsers,
     'get-signed-upload-req': handlers.getSignedUploadReq,
+    'batch-signed-upload-req': handlers.batchedSignedUploadReq,
     notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
   }
 });

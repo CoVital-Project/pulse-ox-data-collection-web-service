@@ -55,6 +55,46 @@
             "description": "Bad request"
           }
         }
+      },
+      "post": {
+        "summary": "Allows batch creation of signed upload URLs when many files need to be uploaded",
+        "operationId": "batch-signed-upload-req",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The file name"
+                        },
+                        "extension": {
+                          "type": "string",
+                          "description": "The file extension"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The survey ID and a list of signed URL objects"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
       }
     },
     "/users": {
@@ -470,6 +510,84 @@
           "Height",
           "SkinColor"
         ]
+      },
+      "Survey": {
+        "title": "Survey",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "weigth": {
+            "type": "number"
+          },
+          "bpm": {
+            "type": "integer"
+          },
+          "spo2": {
+            "type": "integer"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "gyroscope": {
+            "type": "number"
+          },
+          "accelerometer": {
+            "type": "number"
+          },
+          "skin_color": {
+            "type": "string"
+          },
+          "phone_brand": {
+            "type": "string"
+          },
+          "phone_reference": {
+            "type": "string"
+          },
+          "reference_ground_truth_measurement_system": {
+            "type": "string"
+          },
+          "brand_ground_truth_measurement_system": {
+            "type": "string"
+          },
+          "video_data": {
+            "type": "string"
+          },
+          "covid": {
+            "type": "string"
+          },
+          "asthma": {
+            "type": "string"
+          },
+          "copd": {
+            "type": "string"
+          },
+          "smoker": {
+            "type": "string"
+          },
+          "cardio_disease": {
+            "type": "string"
+          },
+          "ild": {
+            "type": "string"
+          },
+          "shortness_breath": {
+            "type": "string"
+          }
+        }
       }
     }
   }
