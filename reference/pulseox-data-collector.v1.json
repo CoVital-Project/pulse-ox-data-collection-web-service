@@ -530,6 +530,9 @@
           "height": {
             "type": "number"
           },
+          "weigth": {
+            "type": "number"
+          },
           "bpm": {
             "type": "integer"
           },
