@@ -5,6 +5,29 @@ import CredentialsService from './service/aws/credentials';
 import S3Service from './service/aws/s3';
 import { v4 as uuidv4 } from 'uuid';
 
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+
+const auth0Tenant = process.env.AUTH0_TENANT || 'o2-monitoring-dev-us';
+const auth0Audience = process.env.AUTH0_AUDIENCE || 'https://pulseox-sandbox.herokuapp.com/';
+
+const validateJwt = jwt({
+    // Dynamically provide a signing key
+    // based on the kid in the header and 
+    // the signing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: 'https://' + auth0Tenant + '.auth0.com/.well-known/jwks.json'
+    }),
+  
+    // Validate the audience and the issuer.
+    audience: auth0Audience,
+    issuer: 'https://' + auth0Tenant + '.auth0.com/',
+    algorithms: ['RS256']
+  });
+
 const env = process.env;
 
 const credsService = new CredentialsService();
@@ -33,6 +56,11 @@ const returns = {
     return err => {
       res.status(500).json({ err: err, operationId: c.operation.operationId });
     };
+  },
+  notAllowed: (c, req, res) => {
+    return err => {
+      res.status(403).json({ err: err, operationId: c.operation.operationId });
+    };
   }
 };
 
@@ -43,20 +71,6 @@ const handlers = {
     User.create(userData)
       .then(returns.success(c, req, res))
       .catch(returns.failure(c, req, res));
-  },
-
-  returnSuccess: (c, req, res) => {
-    return result => {
-      res
-        .status(200)
-        .json({ result: result, operationId: c.operation.operationId });
-    };
-  },
-
-  returnFailure: (c, req, res) => {
-    return err => {
-      res.status(500).json({ err: err, operationId: c.operation.operationId });
-    };
   },
 
   getUser: (c, req, res) => {
@@ -111,13 +125,24 @@ const handlers = {
   }
 };
 
+const authn = {
+  secureWithToken: (c, req, res, handler) => {
+    return validateJwt(req, res, (authResponse) => {
+      if (authResponse && authResponse.code === 'credentials_required'){
+        return returns.notAllowed(c, req, res)(authResponse);
+      }
+      return(handler(c, req, res))
+    });
+  }
+};
+
 // define api
 const api = new OpenAPIBackend({
   definition: apiSchema,
   handlers: {
-    'get-users': handlers.getUsers,
-    'get-users-userid': handlers.getUser,
-    'post-users': handlers.postUsers,
+    'get-users': (c, req, res) => authn.secureWithToken(c, req, res, handlers.getUsers),
+    'get-users-userid': (c, req, res) => authn.secureWithToken(c, req, res, handlers.getUser),
+    'post-users': (c, req, res) => authn.secureWithToken(c, req, res, handlers.postUsers),
     'get-signed-upload-req': handlers.getSignedUploadReq,
     'batch-signed-upload-req': handlers.batchedSignedUploadReq,
     notFound: (c, req, res) => res.status(404).json({ err: 'not found' })
