@@ -11,6 +11,9 @@ const jwksRsa = require('jwks-rsa');
 const auth0Tenant = process.env.AUTH0_TENANT || 'o2-monitoring-dev-us';
 const auth0Audience = process.env.AUTH0_AUDIENCE || 'https://pulseox-sandbox.herokuapp.com/';
 
+// This environment variable should only be set on dev instances
+const disableTokenValidation = process.env.DISABLE_TOKEN_VALIDATION_FOR_DEV === "true" || false; 
+
 const validateJwt = jwt({
     // Dynamically provide a signing key
     // based on the kid in the header and 
@@ -127,6 +130,7 @@ const handlers = {
 
 const authn = {
   secureWithToken: (c, req, res, handler) => {
+    if (disableTokenValidation === true) return(handler(c, req, res));
     return validateJwt(req, res, (authResponse) => {
       if (authResponse && authResponse.code === 'credentials_required'){
         return returns.notAllowed(c, req, res)(authResponse);
