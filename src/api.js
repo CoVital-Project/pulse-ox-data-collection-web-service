@@ -12,7 +12,7 @@ const auth0Tenant = process.env.AUTH0_TENANT || 'o2-monitoring-dev-us';
 const auth0Audience = process.env.AUTH0_AUDIENCE || 'https://pulseox-sandbox.herokuapp.com/';
 
 // This environment variable should only be set on dev instances
-const disableTokenValidation = process.env.DISABLE_TOKEN_VALIDATION_FOR_DEV === "true" || false; 
+const disableTokenValidation = process.env.DISABLE_TOKEN_VALIDATION_FOR_DEV === 'true' || false; 
 
 const validateJwt = jwt({
     // Dynamically provide a signing key
