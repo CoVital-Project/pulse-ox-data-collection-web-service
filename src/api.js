@@ -31,7 +31,7 @@ const returns = {
   },
   failure: (c, req, res) => {
     return err => {
-      res.status(500).json({ err: err, operationId: c.operation.operationId });
+      res.status(400).json({ err: err.message, operationId: c.operation.operationId });
     };
   }
 };
@@ -93,11 +93,15 @@ const handlers = {
 
   batchedSignedUploadReq: (r, req, res) => {
     const files = req.body.files;
+    const source = req.body.source;
+
+    if(!source) return returns.failure(r, req, res)(new Error('[source] must be specified in order to retrieve signed URLs'));
+
     if(!files) return returns.failure(r, req, res)(new Error('[files] must be specified in order to retrieve signed URLs'));
 
     const surveyId = uuidv4();
 
-    s3Service.batchedSignedUploadReqs(surveyId, files)
+    s3Service.batchedSignedUploadReqs(surveyId, source, files)
       .then(
         signedUploadRes => {
           returns.success(r, req, res)({
