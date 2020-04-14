@@ -15,11 +15,15 @@
     },
     {
       "description": "sandbox",
-      "url": "https://pulseox-sandbox.herokuapp.com/"
+      "url": "https://pulseox-sandbox.herokuapp.com"
     },
     {
       "description": "development",
       "url": "http://localhost:9000"
+    },
+    {
+      "description": "production",
+      "url": "https://pulseox-prod.herokuapp.com"
     }
   ],
   "paths": {
@@ -66,6 +70,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "The source of the data",
+                    "enum": [ "community", "clinical" ]
+                  },
                   "files": {
                     "type": "array",
                     "items": {
