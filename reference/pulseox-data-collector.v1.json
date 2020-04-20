@@ -49,6 +49,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "query",
+            "name": "source",
+            "description": "The source of the data to upload",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [ "community", "clinical" ]
+            }
           }
         ],
         "responses": {

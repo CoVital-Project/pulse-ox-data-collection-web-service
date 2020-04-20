@@ -93,6 +93,11 @@ const handlers = {
   getSignedUploadReq: (r, req, res) => {
     const fileName = req.query.filename;
     const fileType = req.query.filetype;
+    const source = req.query.source;
+
+    if (!source) {
+      return returns.failure(r, req, res)(new Error('You must specify a source'));
+    }
 
     if(!fileName || !fileType) {
       return returns.failure(r, req, res)(new Error('You must specify filename and filetype params'));
@@ -100,7 +105,7 @@ const handlers = {
 
     const surveyId = uuidv4();
 
-    s3Service.getSignedUploadReq(surveyId, fileName, fileType)
+    s3Service.getSignedUploadReq(surveyId, fileName, fileType, source)
       .then(
         returns.success(r, req, res),
         returns.failure(r, req, res)
