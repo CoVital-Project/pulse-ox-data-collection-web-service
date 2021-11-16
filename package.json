@@ -33,7 +33,7 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/register": "^7.9.0",
     "@openapi-contrib/openapi-schema-to-json-schema": "^3.0.0",
-    "aws-sdk": "^2.648.0",
+    "aws-sdk": "^2.814.0",
     "babel-preset-es2015": "^6.24.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
