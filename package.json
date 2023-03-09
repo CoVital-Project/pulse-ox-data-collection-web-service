@@ -66,7 +66,7 @@
     "jest": "^25.1.0",
     "jest-cli": "^25.1.0",
     "mongo": "^0.1.0",
-    "openapi-enforcer": "^1.10.1",
+    "openapi-enforcer": "^1.22.2",
     "prettier-eslint": "^9.0.1"
   }
 }
